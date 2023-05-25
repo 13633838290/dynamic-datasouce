@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.dynamicDatasourceService.mapper.open.BizItemsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yang.dynamicDatasourceService.model.entity.BizItems">
+        <id column="id" property="id" />
+        <result column="biz_name" property="bizName" />
+        <result column="biz_state_name" property="bizStateName" />
+        <result column="biz_push_time" property="bizPushTime" />
+        <result column="biz_code" property="bizCode" />
+        <result column="biz_serial_number" property="bizSerialNumber" />
+        <result column="status" property="status" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+</mapper>

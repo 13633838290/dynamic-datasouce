@@ -1,0 +1,99 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /dynamic-datasource-service
+
+spring:
+  application:
+    name: dynamic-datasource-service
+  datasource:
+    druid:
+      db1:
+        url: jdbc:mysql://localhost:3306/open?characterEncoding=UTF-8&serverTimezone=GMT%2b8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: root
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        filters: stat,wall
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        useGlobalDataSourceStat: true
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      db2:
+        url: jdbc:mysql://localhost:3306/login?characterEncoding=UTF-8&serverTimezone=GMT%2b8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: root
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        filters: stat,wall
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        useGlobalDataSourceStat: true
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+#mybatis设置
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:mappings/**/**/*.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: cn.ecg4b.bizboxService.entity
+  global-config:
+    db-config:
+      id-type: auto
+      # 数据库大写下划线转换
+      capital-mode: false
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
+  configuration:
+    # 是否开启自动驼峰命名规则（camel case）映射
+    map-underscore-to-camel-case: true
+    # 全局映射器启用缓存
+    cache-enabled: false
+    # 查询时，关闭关联对象即时加载以提高性能
+    lazy-loading-enabled: true
+    # 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
+    aggressive-lazy-loading: false
+    # 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
+    multiple-result-sets-enabled: true
+    # 允许使用列标签代替列名
+    use-column-label: true
+    # 允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖
+    #use-generated-keys: true
+    # 给予被嵌套的resultMap以字段-属性的映射支持
+    auto-mapping-behavior: full
+    # 对于批量更新操作缓存SQL以提高性能
+    default-executor-type: simple
+    # 数据库超过60秒仍未响应则超时
+    default-statement-timeout: 60
+    # 声明日志使用Log4j2
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+    # 设计查询数据数据库值为null时，Map会自动set一个同名字段并赋值为null
+    call-setters-on-nulls: true
+logging:
+  level:
+    root: info
+    org.springframework.web: info
+    com.yang.dynamicDatasourceService: debug
